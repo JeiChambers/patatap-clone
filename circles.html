@@ -9,6 +9,7 @@
 
     <script type="text/paperscript" canvas="myCanvas">
 
+// Key Data Object
     var keyData = {
         q: {
 		    sound: new Howl({
@@ -26,7 +27,7 @@
 	    	sound: new Howl({
   	    	src: ['sounds/confetti.mp3']
 	    	}),
-	    	color: '#3498db'
+	    	color: '#d35400'
 	    },
 	    r: {
 	    	sound: new Howl({
@@ -104,7 +105,7 @@
 	    	sound: new Howl({
   	    	src: ['sounds/prism-3.mp3']
 	    	}),
-	    	color: '#d35400'
+	    	color: '#c20e50'
 	    },
 	    j: {
 	    	sound: new Howl({
@@ -168,6 +169,8 @@
 	    }
     }
 
+// Functionality
+
     var circles = [];
 
     function onKeyDown(event) {
@@ -185,8 +188,13 @@
 
     function onFrame(event){
         for(var i = 0; i < circles.length; i++){
+            circles[i].scale(0,9);
             circles[i].fillColor.hue += 1;
-            circles[i].scale(.9);
+            if(circles[i].area < 1){
+                circles[i].remove();
+                circles.splice(i, 1);
+                console.log(circles);
+            }
         }
     }
 
